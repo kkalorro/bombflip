@@ -13,17 +13,17 @@ td {
     border: 1px solid green;
 }
 
-.flip {
-    margin: 1rem;
-    padding: 2rem;
+.card {
+    margin: .5rem;
+    padding: 1.5rem;
     background-color: lightseagreen;
     border: 1px solid black;
     display: inline-block;
 }
 
 .hint {
-    margin: 1rem;
-    padding: 1.5rem;
+    margin: .5rem;
+    padding: .8rem;
     background-color: grey;
     border: 1px solid green;
     display: inline-block;
@@ -43,4 +43,14 @@ td {
     top: 20rem;
     right: 2rem;
     position: absolute;
+}
+
+.total-points {
+    color: green;
+    font-weight: bold;
+}
+
+.total-bombs {
+    color: red;
+    font-weight: bold;
 }
