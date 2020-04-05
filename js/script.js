@@ -133,3 +133,11 @@ countHHints(selectHHint);
 ///////////////
 
 const selectCards = selectLeftPlayspace.getElementsByClassName('card');
+
+selectLeftPlayspace.addEventListener('click', (e) => {
+    const targ = e.target;
+
+    if (targ.className === 'card') {
+        console.log(targ);
+    }
+});
