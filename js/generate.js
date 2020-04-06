@@ -1,3 +1,5 @@
+// 1. Check click Answer
+
 //////////
 // Init //
 //////////
@@ -17,7 +19,7 @@ const gridSize = 5;
 // 12 13 14 15 16 17
 // 18 19 20 21 22 23
 // 24 25 26 27 28 29
-// 30 31 32 33 34 XX
+// 30 31 32 33 34
 const answers = [];
 
 ///////////////
@@ -47,8 +49,20 @@ function populateAnswers() {
             answer.value = randNum(4);
             hintCount += 1;
         }
-        
         answers.push(answer);
+    }
+}
+
+function getValue(array, searchFor) {
+    // Look through array
+    for (let i = 0; i < array.length; i++) {
+        // If i matches searchFor
+        if (array[i].id == searchFor) {
+        // return Value
+            console.log(array[i].value);
+        // End If
+        }
+    // End look
     }
 }
 
@@ -57,15 +71,13 @@ function displayAnswer(arr) {
     let html = '';
     // Helper variable to help identify the last answer in the row
     let rowLength = 0;
-
     // Go through every object in the array
     for (let i = 0; i < arr.length; i++) {
-        console.log(`count: ${i}, id: ${arr[i].id}, sum: ${i + gridSize}, arrLength: ${arr.length}, rowlength: ${rowLength}, gridsize: ${gridSize}`);
+        // console.log(`count: ${i}, id: ${arr[i].id}, sum: ${i + gridSize}, arrLength: ${arr.length}, rowlength: ${rowLength}, gridsize: ${gridSize}`);
         // else if i + gridSize < arr.length
         if (i + gridSize >= arr.length) {
-            console.log('test');
             // print hint to html
-            html += `<span class="hint">${arr[i].hint}</span>`;
+            html += `<span id="id${arr[i].id}" class="hint">${arr[i].hint}</span>`;
             // reset rowLength
             rowLength = 0;
         // if it's not the end of the row
@@ -73,7 +85,7 @@ function displayAnswer(arr) {
             // if answer obj in array has id matching i
             if (arr[i].id === i) {
                 // print value to html
-                html += `<span class="card">${arr[i].value}</span>`;
+                html += `<span id="id${arr[i].id}" class="card">${arr[i].value}</span>`;
                 // Count up rowLength
                 rowLength += 1;
             // end if
@@ -81,7 +93,7 @@ function displayAnswer(arr) {
         // else
         } else { 
             // print hint to html
-            html += `<span class="hint">${arr[i].hint}</span><br>`;
+            html += `<span id="id${arr[i].id}" class="hint">${arr[i].hint}</span><br>`;
             // reset rowLength
             rowLength = 0;
         // end if
@@ -91,27 +103,19 @@ function displayAnswer(arr) {
     selectLeftPlayspace.innerHTML = html;
 }
 
-        // // Display a horizontal row
-        // html += `<span class="answer">${}</span>`;
-
-        // for (let j = 0; j < arr[i].length; j++) {
-        //     // Create a Card Span for each value in array
-        //     html += `<span class="card">${grid[i][j]}</span>`;
-        // }
-        // // Create a Hint Span for each horizontal array
-        // html += '<span class="vertical-hint hint">8/8</span><br>';
-
-    // // Create a Hint Span for each vertical array
-    // for (let i = 0; i < arr.length; i++) {
-    //     html += '<span class="horizontal-hint hint">8/8</span>';
-    // }
-
-    // Update Playspace with new HTML code
-    
-
 /////////
 // Run //
 /////////
 populateAnswers();
 displayAnswer(answers);
-// console.log(answers);
+
+///////////////
+// Listeners //
+///////////////
+
+selectLeftPlayspace.addEventListener('click', (e) => {
+    const targ = e.target;
+    if (targ.className === 'card') {
+        getValue(answers, targ.id.split('id')[1]);
+    } 
+});
