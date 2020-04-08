@@ -7,38 +7,27 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <table id="playspace">
-        <tr>
-            <td>
-                <table id="left-playspace"></table>
-            </td>
-            <td>
-                <table id="right-playspace">
-                    <tr id="right-top-playspace">
-                        <td>POINTS: <span id="points">888</span></td>
-                    </tr>
-                    <tr id="right-bottom-playspace">
-                        <td>
-                            <table id="marker">
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Back</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
+    <div>
+        <tr id="right-top-playspace">
+            <td>POINTS: <span id="score">0</span></td>
+            <td>BOMBS: <span id="bombs-guessed">0</span>/<span id="bomb-count">0</span></td>
+            <td><button id="restart">Restart</button></td>
         </tr>
-    </table>
+    </div>
+    <div id="playspace"></div>
+    <div id="right-bottom-playspace">
+        <td>
+            <table id="marker">
+                <tr>
+                    <td>Bomb</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>Back</td>
+                </tr>
+            </table>
+        </td>
+    </div>
     <script src="js/generate.js"></script>
 </body>
 </html>

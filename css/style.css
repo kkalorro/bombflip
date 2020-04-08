@@ -1,48 +1,41 @@
-#playspace {
+div {
     width: 100%;
     border: 1px solid black;
     
 }
 
-tr {
+td {
     border: 1px solid blue;
     
 }
 
-td {
-    border: 1px solid green;
-}
-
 .card {
-    margin: .5rem;
-    padding: 1.5rem;
+    margin: .4rem;
+    padding: 1.2rem;
     background-color: lightseagreen;
     border: 1px solid black;
     display: inline-block;
 }
 
+.revealed-points {
+    background-color: green;
+}
+
+.revealed-bomb {
+    background-color: lightcoral;
+}
+
 .hint {
-    margin: .5rem;
-    padding: .8rem;
+    margin: .4rem;
+    padding: .3rem;
     background-color: grey;
     border: 1px solid green;
     display: inline-block;
+    font-size: small;
 }
 
 .selected {
     background-color: lightsalmon;
-}
-
-#right-top-playspace {
-    top: 2rem;
-    right: 2rem;
-    position: absolute;
-}
-
-#right-bottom-playspace {
-    top: 20rem;
-    right: 2rem;
-    position: absolute;
 }
 
 .total-points {
