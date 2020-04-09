@@ -8,25 +8,21 @@
 </head>
 <body>
     <div>
-        <tr id="right-top-playspace">
-            <td>POINTS: <span id="score">0</span></td>
-            <td>BOMBS: <span id="bombs-guessed">0</span>/<span id="bomb-count">0</span></td>
-            <td><button id="restart">Restart</button></td>
-        </tr>
-    </div>
-    <div id="playspace"></div>
-    <div id="right-bottom-playspace">
-        <td>
-            <table id="marker">
-                <tr>
-                    <td>Bomb</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>Back</td>
-                </tr>
-            </table>
-        </td>
+        <span>POINTS: <span id="score">0</span></span>
+        <span>BOMBS: 
+            <span id="bombs-guessed">0</span>
+            /
+            <span id="bomb-count">0</span>
+        </span>
+        <span>
+            <button id="restart">Restart</button>
+        </span>
+        <table id="playspace"></table>
+        <button>Bomb</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>Back</button>
     </div>
     <script src="js/generate.js"></script>
 </body>

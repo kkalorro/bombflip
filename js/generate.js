@@ -101,38 +101,83 @@ function resetBombCount(array) {
 
 // Convert Answers into HTML and display
 function displayAnswer(arr) {
+// Display grid
+    // Make sure all cards and hints are identified
+    // Make sure everything is within table cells
+    // Make sure there's a new row after every gridSize+1
+// Build 2d array of cards
+// Go:
+// tr 00 01 02 03 04 /tr
+// tr 05 06 07 08 09 /tr
+// tr 10 11 12 13 14 /tr
+// tr 15 16 17 18 19 /tr
+// tr 20 21 22 23 24 /tr
+// tr 26 27 28 29 30 /tr   
+    
+// Display grid to HTML
+// Key globals: arr (argument), gridSize (5)
+
+    // Reset HTML
     let html = '';
     // Helper variable to help identify the last answer in the row
     let rowLength = 0;
-    // Go through every object in the array
+
+    // For every object in array
     for (let i = 0; i < arr.length; i++) {
-        // console.log(`count: ${i}, id: ${arr[i].id}, sum: ${i + gridSize}, arrLength: ${arr.length}, rowlength: ${rowLength}, gridsize: ${gridSize}`);
-        // else if i + gridSize < arr.length
-        if (i + gridSize >= arr.length) {
-            // print hint to html
-            html += `<span id="id${arr[i].id}" class="hint">88/88</span>`;
-            // reset rowLength
-            rowLength = 0;
-        // if it's not the end of the row
-        } else if (rowLength !== gridSize) {
-            // if answer obj in array has id matching i
-            if (arr[i].id === i) {
-                // Create Card in HTML
-                html += `<span id="id${arr[i].id}" class="card">?</span>`;
-                // Count up rowLength
-                rowLength++;
-            // end if
-            }
-        // else
-        } else { 
-            // print hint to html
-            html += `<span id="id${arr[i].id}" class="hint">88/88</span><br>`;
-            // reset rowLength
-            rowLength = 0;
-        // end if
+        // If at the start of row add tr
+        // Start of row is rowLength of 0
+        if (rowLength === 0) {
+            html += '<tr>'
         }
-    // end for
-    }
+        // If not at end of row or not last row add span card then count up rowLength
+        // rowLength is not gridSize and loop + gridSize is not bigger than array length
+        if (rowLength !== gridSize && i + gridSize < answers.length) {
+            html += `<td><span id="id${arr[i].id}" class="card">?</span></td>`;
+            rowLength++;
+        // Else If at end of row add span hint /tr and reset rowLength
+        } else if (rowLength === gridSize) {
+            html += `<td><span id="id${arr[i].id}" class="hint">88/88</span></td></tr>`;
+            rowLength = 0;
+        // Else If last row add span hint then count up rowLength
+        // Last row is: loop + gridSize equal or bigger than array length
+        } else if (i + gridSize >= arr.length) {
+            html += `<td><span id="id${arr[i].id}" class="hint">END</span></td>`;
+            rowLength++;
+        }
+    // End for
+    };
+    console.log(html);
+    
+    // // Go through every object in the array
+    // for (let i = 0; i < arr.length; i++) {
+    //     html += '<tr>';
+    //     // console.log(`count: ${i}, id: ${arr[i].id}, sum: ${i + gridSize}, arrLength: ${arr.length}, rowlength: ${rowLength}, gridsize: ${gridSize}`);
+    //     // else if i + gridSize < arr.length
+    //     if (i + gridSize >= arr.length) {
+    //         // print hint to html
+    //         html += `<span id="id${arr[i].id}" class="hint">88/88</span></tr>`;
+    //         // reset rowLength
+    //         rowLength = 0;
+    //     // if it's not the end of the row
+    //     } else if (rowLength !== gridSize) {
+    //         // if answer obj in array has id matching i
+    //         if (arr[i].id === i) {
+    //             // Create Card in HTML
+    //             html += `<span id="id${arr[i].id}" class="card">?</span>`;
+    //             // Count up rowLength
+    //             rowLength++;
+    //         // end if
+    //         }
+    //     // else
+    //     } else { 
+    //         // print hint to html
+    //         html += `<span id="id${arr[i].id}" class="hint">88/88</span><br>`;
+    //         // reset rowLength
+    //         rowLength = 0;
+    //     // end if
+    //     }   
+    // // end for
+    // }
     selectPlayspace.innerHTML = html;
 }
 

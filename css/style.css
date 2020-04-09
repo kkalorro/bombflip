@@ -1,16 +1,23 @@
 div {
-    width: 100%;
-    border: 1px solid black;
-    
+    width: min-content;
+}
+
+span {
+    border: 1px dotted red;
+}
+
+table {
+    border: 1px dotted pink;
 }
 
 td {
-    border: 1px solid blue;
-    
+    padding: 0px;
+    border: 1px dotted blue;
+    text-align: center;
 }
 
 .card {
-    margin: .4rem;
+    margin: .3rem;
     padding: 1.2rem;
     background-color: lightseagreen;
     border: 1px solid black;
@@ -26,7 +33,7 @@ td {
 }
 
 .hint {
-    margin: .4rem;
+    margin: .3rem;
     padding: .3rem;
     background-color: grey;
     border: 1px solid green;
