@@ -3,7 +3,7 @@ div {
 }
 
 span {
-    border: 1px dotted red;
+    
 }
 
 table {
@@ -25,7 +25,7 @@ td {
 }
 
 .revealed-points {
-    background-color: green;
+    background-color: forestgreen;
 }
 
 .revealed-bomb {
@@ -35,14 +35,20 @@ td {
 .hint {
     margin: .3rem;
     padding: .3rem;
-    background-color: grey;
+    background-color: lightblue;
     border: 1px solid green;
     display: inline-block;
     font-size: small;
 }
 
-.selected {
-    background-color: lightsalmon;
+.points {
+    color: green;
+    
+}
+
+.bombs {
+    color: red;
+    font-weight: bold;
 }
 
 .total-points {

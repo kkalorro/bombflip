@@ -14,6 +14,8 @@ const selectPlayspace = document.getElementById('playspace');
 const selectRestart = document.getElementById('restart');
 // Select Score
 const selectScore = document.getElementById('score');
+// Select Winning Score
+const selectWinningScore = document.getElementById('winning-score');
 // Select Bombs Guessed
 const selectBombsGuessed = document.getElementById('bombs-guessed');
 // Select Bombs Total
@@ -31,6 +33,8 @@ const rowHints = [];
 const colHints = [];
 // Array containing IDs of Hints
 const hints = [];
+// Winning score
+let winningScore = 0;
 
 ///////////////
 // Functions //
@@ -157,6 +161,8 @@ function populategrid(array) {
 // y=4: [20 21 22 23 24]
 // Key variables: array = grid, rows = rowHints, cols = colHints, maxSize = gridSize
 function getHints(array, rows, cols, maxSize) {
+    // Reset winning condition
+    winningScore = 0;
     const maxY = maxSize;
     const maxX = maxSize;
     cleanArray(rows);
@@ -172,6 +178,8 @@ function getHints(array, rows, cols, maxSize) {
                 // If value is not 0 count up Points
                 if (value != 0) {
                     points += value;
+                    // Inserting Winning Condition
+                    winningScore += value;
                 // Else count up Bombs
                 } else {
                     bombs++;
@@ -203,6 +211,8 @@ function getHints(array, rows, cols, maxSize) {
         cols.push([points, bombs]);
     }
     getHintIDs(grid, hints);
+    // Visually update the Winning Score
+    selectWinningScore.textContent = winningScore;
 }
 
 // Get IDs of hints
@@ -254,6 +264,18 @@ function resetBombCount(array) {
     selectBombCount.textContent = bombCount;
 }
 
+function getWinningCondition() {
+    winningScore = 0;
+    for (let i = 0; i < grid.length; i++) {
+        const val = getValueById(grid, i);
+        // if (val != NaN) {
+            console.log(val);
+            // winningScore += val;   
+        // }
+    }
+    selectWinningScore.textContent = winningScore;
+}
+
 // Convert grid into HTML and display
 function displayAnswer(array) {
 // X) Display grid in HTML
@@ -292,12 +314,12 @@ function displayAnswer(array) {
             rowLength++;
         // Else If at end of row add span hint /tr and reset rowLength
         } else if (rowLength === gridSize) {
-            html += `<td><span id="id${array[i].id}" class="hint">${getKeyValueByID(array, i, 'points')}/${getKeyValueByID(array, i, 'bombs')}</span></td></tr>`;
+            html += `<td><span id="id${array[i].id}" class="hint"><span class="points">${getKeyValueByID(array, i, 'points')}</span>/<span class="bombs">${getKeyValueByID(array, i, 'bombs')}</span></span></td></tr>`;
             rowLength = 0;
         // Else If last row add span hint then count up rowLength
         // Last row is: loop + gridSize equal or bigger than array length
         } else if (i + gridSize >= array.length) {
-            html += `<td><span id="id${array[i].id}" class="hint">${getKeyValueByID(array, i, 'points')}/${getKeyValueByID(array, i, 'bombs')}</span></td>`;
+            html += `<td><span id="id${array[i].id}" class="hint"><span class="points">${getKeyValueByID(array, i, 'points')}</span>/<span class="bombs">${getKeyValueByID(array, i, 'bombs')}</span></span></td>`;
             rowLength++;
         }
     };
@@ -311,6 +333,7 @@ function startGame() {
     populategrid(grid);
     resetBombCount(grid);
     displayAnswer(grid);
+    // getWinningCondition();
 }
 
 /////////
@@ -327,18 +350,23 @@ selectPlayspace.addEventListener('click', (e) => {
         const targ = e.target;
         if (targ.className === 'card') {
             const revealedValue = getValueById(grid, targ.id.split('id')[1]);
-            console.log(revealedValue);
+            // console.log(revealedValue);
             targ.textContent = revealedValue;
             // If revealed card is a bomb (zero) then color card red then end game
             if (revealedValue === 0) {
                 targ.classList.add('revealed-bomb');
                 alert('Gameover!');
                 gameover = true;
-            // else if revealed card is not a bomb then award points
+            // Else if revealed card is not a bomb then award points
             } else {
                 targ.classList.add('revealed-points');
                 score += revealedValue
                 selectScore.textContent = score;
+                // Check score to see if player won
+                if (score === winningScore) {
+                    alert('You win!');
+                    gameover = true;
+                }   
             }
             
         }
