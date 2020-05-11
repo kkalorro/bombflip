@@ -2,6 +2,8 @@
 // Init //
 //////////
 
+const version = '0.0.0.10';
+
 // Game is Active
 let gameover = true;
 
